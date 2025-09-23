@@ -20,19 +20,19 @@ cadastro, selecao de agendamento, visualizacao de perfil, edicao de perfil e ger
 <img width="476" height="418" alt="image" src="https://github.com/user-attachments/assets/cf987e47-9d32-43ea-9c57-eb94dc8faaef" />
 
 5.4 Diagramas de sequ ˆencia
-A Figura 3 apresenta o diagrama de sequencia que representa os principais fluxos de interac¸ ˜ao entre os compo-
+A Figura 3 apresenta o diagrama de sequencia que representa os principais fluxos de interacão entre os compo-
 nentes da aplicacao, abrangendo os processos de cadastro e login, criacao agendamentos, visulizacao de servicos
-e edic¸ ˜ao de perfil. Esse diagrama descreve, de forma detalhada, a troca de mensagens entre os elementos do
+e edição de perfil. Esse diagrama descreve, de forma detalhada, a troca de mensagens entre os elementos do
 sistema ao longo do tempo, evidenciando a ordem das operac¸ ˜oes, a dinamica dos processos e a dependencia
 entre os requisitos funcionais.
-Por meio dessa representacao, ´e possıvel compreender como os diferentes modulos da aplicacao interagem
-para atender `as funcionalidades esperadas.
+Por meio dessa representacao, é possıvel compreender como os diferentes modulos da aplicacao interagem
+para atender às funcionalidades esperadas.
 
 <img width="579" height="652" alt="image" src="https://github.com/user-attachments/assets/d82efb98-d27e-4f9c-84f8-354e541cc391" />
 
 5.5 Diagrama Entidade-Relacionamento
 O diagrama Entidade-Relacionamento (ER) da aplicacao Envite, apresentado na Figura 4, ilustra as principais
-entidades do sistema e as relac¸ ˜oes existentes entre elas. Este diagrama e fundamental para garantir a consistencia
+entidades do sistema e as relacões existentes entre elas. Este diagrama e fundamental para garantir a consistencia
 e integridade do banco de dados, alem de possibilitar um modelo eficiente para o armazenamento e gerenciamento
 das informacoes.
 
@@ -159,15 +159,15 @@ Requisitos N ˜ao Funcionais
 Numerac¸ ˜ao Descric¸ ˜ao Depende de
 RNF 01
 Performance
-- O sistema deve ser capaz de lidar com um volume razo ´avel de
+- O sistema deve ser capaz de lidar com um volume razoável de
 dados sem perda de desempenho.
 RNF 02
 Usabilidade
-- A interface deve ser intuitiva, com f ´acil navegac¸ ˜ao entre as fun-
+- A interface deve ser intuitiva, com fácil navegacão entre as fun-
 cionalidades principais.
 RNF 03
 Compatibilidade
 - O sistema deve ser compat´ıvel com os principais navegadores
-e responsivo para dispositivos m ´oveis.
-Tabela 3: Tabela dos Requisitos n ˜ao funcionais do site T ˆania Cabelos.
+e responsivo para dispositivos móveis.
+Tabela 3: Tabela dos Requisitos não funcionais do site Tânia Cabelos.
 17
