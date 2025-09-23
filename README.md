@@ -1,20 +1,20 @@
 
 <img width="554" height="370" alt="image" src="https://github.com/user-attachments/assets/efa57d3f-7c9d-4b33-afeb-56fe3e1132bf" />
 Neste diagrama temos as entidades: Usuario, Cliente, Servicos, Agenda e Administrador. Elas trabalham juntas
-para formar a estrutura do site do salao de cabelos, permitindo que os usu ´arios agendem servicos, enquanto os
+para formar a estrutura do site do salao de cabelos, permitindo que os usuarios agendem servicos, enquanto os
 administradores supervisionam e controlam as atividades do sistema. A seguir uma breve explicacao de cada uma
 delas:
 • Usuario: Representa qualquer pessoa que use o sistema. E a classe base que contem informacoes comuns
 a todos os usuarios, como ID, nome, e-mail.
-• Cliente: Extens ˜ao da classe Usuario, que inclui funcoes especıficas para clientes.
+• Cliente: Extensao da classe Usuario, que inclui funcoes especıficas para clientes.
 • Servicos: Representa um tipo de servic¸o que e oferecido pelo salao de beleza e pode ser agendado pelo
 cliente.
 • Agenda: Horarios disponıveis para agendamento de algum servic¸o.
-• Administrador: Representa o usu ´ario que ir a gerenciar o sistema, podendo tambem cadastrar, alterar e
+• Administrador: Representa o usuario que ir a gerenciar o sistema, podendo tambem cadastrar, alterar e
 remover outros usuarios.
 5.3 Diagramas de casos de uso
 A Figura 2 mostra o Diagrama de Casos de Uso para o site do Salao de Beleza. O principal ator envolvido ´e o
-Usuario Cadastrado. O ator est ´a relacionado a diferentes funcoes dentro da plataforma, como a realizacao de
+Usuario Cadastrado. O ator esta relacionado a diferentes funcoes dentro da plataforma, como a realizacao de
 cadastro, selecao de agendamento, visualizacao de perfil, edicao de perfil e gerencia de agendamento.
 
 <img width="476" height="418" alt="image" src="https://github.com/user-attachments/assets/cf987e47-9d32-43ea-9c57-eb94dc8faaef" />
