@@ -1,3 +1,4 @@
+<img width="553" height="659" alt="image" src="https://github.com/user-attachments/assets/a3b49b77-689b-40ed-a468-cd61078275c6" />
 
 <img width="554" height="370" alt="image" src="https://github.com/user-attachments/assets/efa57d3f-7c9d-4b33-afeb-56fe3e1132bf" />
 Neste diagrama temos as entidades: Usuario, Cliente, Servicos, Agenda e Administrador. Elas trabalham juntas
@@ -97,6 +98,7 @@ detalhes sobre o agendamento.
 • Perguntas Frequentes: Nessa tela s ˜ao exibidas d ´uvidas frequentes que clientes costumam ter em certos
 procedimentos.
 • Avaliac¸ ˜oes : Avaliac¸ ˜oes dos clientes.
+
 <img width="565" height="691" alt="image" src="https://github.com/user-attachments/assets/80819598-7ca3-4aad-9589-ce92715b2f53" />
 
 • Perfis: Foram desenvolvidas duas telas de perfis de usu ´ario, uma para o cliente e outra para a atendente.
@@ -106,68 +108,11 @@ suas informac¸ ˜oes de perfil. No perfil da atendente ser ´a vis´ıvel os ag
 editar informac¸ ˜oes de outros usu ´arios, como redefinir a senha, e editar informac¸ ˜oes administrativas.
 ((a)) Perfil do Cliente ((b)) Perfil da Atendente
 Figura 14: Perfis do Cliente e da Atendente
-8 Refer ˆencias Bibliogr ´aficas
+8 Referencias Bibliograficas
 [1] Lavanya Chandrasekaran, Bonnie A. Nardi, and Carolyn J. Linde. Non-Functional Requirements in Software
 Engineering. Springer, 2012.
 [2] Roger S. Pressman and Bruce R. Maxim. Engenharia de Software. McGraw-Hill, 8 edition, 2016.
 [3] Ian Sommerville. Software Engineering. Pearson Education, 9 edition, 2011.
 [4] Karl Wiegers and Joy Beatty. Software Requirements. Microsoft Press, 3 edition, 2014.
-15
-Anexos
-Requisitos Funcionais
-Numerac¸ ˜ao Descric¸ ˜ao Depende de
-RF 01
-Cadastro de Usu ´arios
-- O sistema deve permitir o cadastro de novos usu ´arios.
-RF 02 Autenticac¸ ˜ao de Usu ´arios RF 01
-- O sistema deve permitir que usu ´arios fac¸am login e logout com
-email e senha. Login Cliente e Login Administrador
-.
-RF 03
-Gerenciamento de Perfis
-RF 01- O perfil deve conter, nome e contato. Adicionar cpf e e-mail.
-- Usu ´arios devem poder visualizar e editar suas informac¸ ˜oes pes-
-soais no perfil.
-- O perfil deve exibir os agendamentos criados pelo usu ´ario.
-RF 04
-Criac¸ ˜ao de Agendamentos
-RF 01- O sistema deve permitir que qualquer usu ´ario crie (Selecione)
-novos agendamentos, preenchendo informac¸ ˜oes como servic¸o,
-data, hor ´ario.
-RF 05
-Listagem de Agendamentos
-RF 01, RF 04- O administrador poder ´a ver os agendamentos na ordem em
-que foram feitos.
-- O administrador poder ´a filtrar os agendamentos por dia.
-RF 06
-Gerenciamento de Agendamentos
-RF 01, RF 04- O sistema deve permitir que usu ´arios visualizem, editem e can-
-cele um agendamento pendente.
-RF 07
-Quadro de Informac¸ ˜oes
-- O sistema ter ´a um espac¸o dedicado a informac¸ ˜oes sobre contra
-indicac¸ ˜oes de procedimentos.
-RF 08
-Tabela de servic¸ os
--O sistema contar ´a com uma tabela onde ficar ˜ao vis´ıveis os
-servic¸os com seus respectivos prec¸os, de acordo com o tama-
-nho do cabelo do cliente (pequeno, m ´edio, grande) e m ´edia de
-durac¸ ˜ao do procedimento.
-Tabela 2: Tabela dos Requisitos funcionais do site T ˆania Cabelos.
-16
-Requisitos N ˜ao Funcionais
-Numerac¸ ˜ao Descric¸ ˜ao Depende de
-RNF 01
-Performance
-- O sistema deve ser capaz de lidar com um volume razoável de
-dados sem perda de desempenho.
-RNF 02
-Usabilidade
-- A interface deve ser intuitiva, com fácil navegacão entre as fun-
-cionalidades principais.
-RNF 03
-Compatibilidade
-- O sistema deve ser compat´ıvel com os principais navegadores
-e responsivo para dispositivos móveis.
-Tabela 3: Tabela dos Requisitos não funcionais do site Tânia Cabelos.
-17
+
+15<img width="548" height="658" alt="image" src="https://github.com/user-attachments/assets/8aa7a4ad-4fd1-4714-a269-8d1092534489" />
