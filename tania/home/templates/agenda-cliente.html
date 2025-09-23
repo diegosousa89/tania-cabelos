@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Agenda de Horários (Somente Visualização)</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f4f6f8;
+        }
+
+        .calendar {
+            width: 70%;
+            padding: 20px;
+            float: left;
+        }
+
+        .month {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .days {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+            margin-top: 10px;
+        }
+
+        .day {
+            padding: 12px;
+            border-radius: 6px;
+            text-align: center;
+            cursor: pointer;
+            background: white;
+            transition: 0.2s;
+        }
+
+        .day:hover {
+            background: #e9efff;
+        }
+
+        .day.today {
+            border: 2px solid #007BFF;
+        }
+
+        .day.selected {
+            background: #007BFF;
+            color: white;
+        }
+
+        .agenda {
+            width: 30%;
+            background: #fff;
+            padding: 20px;
+            border-left: 1px solid #ddd;
+            float: left;
+            min-height: 100vh;
+        }
+
+        .event {
+            background: #e0e0ff;
+            padding: 8px;
+            margin: 5px 0;
+            border-radius: 4px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, .5);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            width: 400px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .time-slot {
+            padding: 10px;
+            margin: 4px 0;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .time-slot.free {
+            background: #f9f9f9;
+            border: 1px dashed #bbb;
+            cursor: pointer;
+        }
+
+        .time-slot.free:hover {
+            background: #e6f2ff;
+        }
+
+        .time-slot.busy {
+            background: #007BFF;
+            color: white;
+        }
+
+        .form {
+            margin-top: 10px;
+        }
+
+        .form input,
+        .form textarea {
+            width: 100%;
+            padding: 6px;
+            margin: 5px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .form button {
+            padding: 8px 12px;
+            margin: 5px 3px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .save {
+            background: #28a745;
+            color: white;
+        }
+
+        .cancel {
+            background: #dc3545;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="calendar">
+        <div class="month">
+            <button onclick="prevMonth()">&#9664;</button>
+            <h2 id="monthLabel"></h2>
+            <button onclick="nextMonth()">&#9654;</button>
+        </div>
+        <div class="days" id="days"></div>
+    </div>
+
+    <div class="agenda">
+        <h3 id="selectedDateLabel">Selecione um dia</h3>
+        <div id="eventList"></div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="eventModal">
+        <div class="modal-content">
+            <h3 id="modalTitle">Agenda do Dia</h3>
+            <div id="timeSlots"></div>
+        </div>
+    </div>
+
+    <script>
+        const daysContainer = document.getElementById('days');
+        const monthLabel = document.getElementById('monthLabel');
+        const eventList = document.getElementById('eventList');
+        const selectedDateLabel = document.getElementById('selectedDateLabel');
+        const modal = document.getElementById('eventModal');
+        const timeSlotsContainer = document.getElementById('timeSlots');
+
+        let currentDate = new Date();
+        let selectedDate = null;
+        let events = JSON.parse(localStorage.getItem("events") || "[]");
+
+        const startHour = 8;
+        const endHour = 20;
+
+        function renderCalendar() {
+            daysContainer.innerHTML = "";
+            const year = currentDate.getFullYear();
+            const month = currentDate.getMonth();
+            const firstDay = new Date(year, month, 1).getDay();
+            const lastDate = new Date(year, month + 1, 0).getDate();
+
+            monthLabel.textContent = currentDate.toLocaleDateString("pt-BR", { month: "long", year: "numeric" });
+
+            for (let i = 0; i < firstDay; i++) {
+                daysContainer.innerHTML += "<div></div>";
+            }
+
+            for (let d = 1; d <= lastDate; d++) {
+                const day = document.createElement("div");
+                day.className = "day";
+                day.textContent = d;
+
+                const thisDate = new Date(year, month, d);
+                if (new Date().toDateString() === thisDate.toDateString()) {
+                    day.classList.add("today");
+                }
+                if (selectedDate && thisDate.toDateString() === selectedDate.toDateString()) {
+                    day.classList.add("selected");
+                }
+
+                day.onclick = () => {
+                    selectedDate = thisDate;
+                    renderCalendar();
+                    renderEvents();
+                    openModal();
+                };
+                daysContainer.appendChild(day);
+            }
+        }
+
+        function renderEvents() {
+            eventList.innerHTML = "";
+            if (!selectedDate) {
+                selectedDateLabel.textContent = "Selecione um dia";
+                return;
+            }
+            selectedDateLabel.textContent = selectedDate.toLocaleDateString("pt-BR");
+            const dayEvents = events.filter(ev => ev.date === selectedDate.toDateString());
+            dayEvents.forEach(ev => {
+                const div = document.createElement("div");
+                div.className = "event";
+                div.textContent = `${ev.start} - ${ev.end} | ${ev.title}`;
+                eventList.appendChild(div);
+            });
+        }
+
+        function openModal() {
+            modal.style.display = "flex";
+            renderTimeSlots();
+        }
+
+        function closeModal() {
+            modal.style.display = "none";
+        }
+
+        function renderTimeSlots() {
+            timeSlotsContainer.innerHTML = "";
+            const dayEvents = events.filter(ev => ev.date === selectedDate.toDateString());
+
+            for (let h = startHour; h <= endHour; h++) {
+                const hourStr = String(h).padStart(2, "0") + ":00";
+                const occupied = dayEvents.some(ev => isHourInRange(hourStr, ev.start, ev.end));
+
+                const slotDiv = document.createElement("div");
+                if (occupied) {
+                    const ev = dayEvents.find(ev => isHourInRange(hourStr, ev.start, ev.end));
+                    slotDiv.className = "time-slot busy";
+                    slotDiv.innerHTML = `<span>${hourStr} - Ocupado (${ev.title})</span>`;
+                } else {
+                    slotDiv.className = "time-slot free";
+                    slotDiv.textContent = hourStr + " (Livre)";
+                    slotDiv.onclick = () => showForm(hourStr);
+                }
+                timeSlotsContainer.appendChild(slotDiv);
+            }
+        }
+
+        function isHourInRange(hour, start, end) {
+            return hour >= start && hour < end;
+        }
+
+        function showForm(startHourStr) {
+            const form = document.createElement("div");
+            form.className = "form";
+            form.innerHTML = `
+      <label>Início:</label>
+      <input type="time" id="newStart" value="${startHourStr}">
+      <label>Fim:</label>
+      <input type="time" id="newEnd" value="">
+      <input type="text" id="newTitle" placeholder="Título">
+      <textarea id="newDesc" placeholder="Descrição"></textarea>
+      <button class="save" onclick="saveEvent()">Salvar</button>
+      <button class="cancel" onclick="renderTimeSlots()">Cancelar</button>
+    `;
+            timeSlotsContainer.innerHTML = "";
+            timeSlotsContainer.appendChild(form);
+        }
+
+        function saveEvent() {
+            const start = document.getElementById("newStart").value;
+            const end = document.getElementById("newEnd").value;
+            const title = document.getElementById("newTitle").value;
+            const desc = document.getElementById("newDesc").value;
+
+            if (!title.trim() || !start || !end) {
+                alert("Preencha todos os campos!");
+                return;
+            }
+            if (end <= start) {
+                alert("O horário de fim deve ser maior que o de início.");
+                return;
+            }
+
+            const dayEvents = events.filter(ev => ev.date === selectedDate.toDateString());
+            if (dayEvents.some(ev => (start < ev.end && end > ev.start))) {
+                alert("Conflito de horários!");
+                return;
+            }
+
+            events.push({ id: Date.now(), date: selectedDate.toDateString(), start, end, title, desc });
+            localStorage.setItem("events", JSON.stringify(events));
+            renderEvents();
+            renderTimeSlots();
+        }
+
+        function prevMonth() { currentDate.setMonth(currentDate.getMonth() - 1); renderCalendar(); }
+        function nextMonth() { currentDate.setMonth(currentDate.getMonth() + 1); renderCalendar(); }
+
+        // Fechar modal clicando fora
+        window.onclick = function (event) {
+            if (event.target === modal) {
+                closeModal();
+            }
+        };
+
+        renderCalendar();
+    </script>
+
+</body>
+
+</html>
